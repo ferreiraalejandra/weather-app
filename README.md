@@ -1,3 +1,7 @@
+#Weather-app
+
+This app is part of a coding exam for smartcoding in stockholm
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
