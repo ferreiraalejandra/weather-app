@@ -1,35 +1,38 @@
 import React, {useEffect, useState} from 'react';
-
+import WeatherView from './WeatherView'
 
 const WeatherDisplay = () => {
     const url = 'http://api.openweathermap.org/data/2.5/weather?';
     const APP_IDKEY = '828cab073a2681f16e65a7058f2f8b1e';
 
-    const [weather, setWeather] = useState({});
+        const [weather, setWeather] = useState({main: {}, weather:[0]})
+    const [description, setDescription] = useState({})
     const [cityName, setCityName] = useState('London')
     const [countryCode, setCountryCode] = useState('uk')
 
     useEffect(() => {
-        getCurrentWeather(cityName, countryCode);
+        getCurrentWeather(cityName, countryCode)
     }, []);
 
     const getCurrentWeather = async (cityName, countryCode) => {
-        const response = await fetch(url + 'q=' + cityName + ',' + countryCode + '&APPID=' + APP_IDKEY);
-        const data = await response.json();
+        const response = await fetch(url + 'q=' + cityName + ',' + countryCode + '&APPID=' + APP_IDKEY)
+        const data = await response.json()
+        // console.log(data)
         setWeather(data)
     };
 
     const changeCity = (eventCity) => {
         const newCity = eventCity.target.value
         setCityName(newCity)
-        getCurrentWeather(newCity, countryCode)
-        console.log(eventCity, eventCity.target.value)
     }
 
     const changeCountry = (eventCountry) => {
         const newCountry = eventCountry.target.value
         setCountryCode(newCountry)
-        getCurrentWeather(cityName, newCountry)
+    }
+
+    const callAPI = (eventButton) => {
+        getCurrentWeather(cityName, countryCode)
     }
 
     return (
@@ -44,16 +47,17 @@ const WeatherDisplay = () => {
                     <input id='country-code' className="search-bar" type="text" onChange={changeCountry}/>
                 </div>
                 
-                <button className="search-button" type="submit">
+                <button className="search-button" type="button" onClick={callAPI}>
                     submit
                 </button>
             </form>
-            <div>
+            {/* <div>
                 {JSON.stringify(weather)}
-            </div>
-            <div>
+            </div> */}
+            {/* <div>
                 {cityName} - {countryCode}
-            </div>
+            </div> */}
+            <WeatherView cityName={cityName} countryCode={countryCode} weather={weather} description={description} />
         </div>
     );
 }
