@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import WeatherView from './WeatherView'
 
 const WeatherDisplay = () => {
-    const url = 'http://api.openweathermap.org/data/2.5/weather?';
+    const url = 'https://api.openweathermap.org/data/2.5/weather?';
     const APP_IDKEY = '828cab073a2681f16e65a7058f2f8b1e';
 
         const [weather, setWeather] = useState({main: {}, weather:[0]})
