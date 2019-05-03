@@ -18,8 +18,8 @@ const WeatherDisplay = () => {
 
     const getCurrentWeather = async (cityName, countryCode) => {
         const response = await fetch(url + 'q=' + cityName + ',' + countryCode + '&APPID=' + APP_IDKEY)
-        console.log(response)
-	const data = response.status === 200 ? await response.json() : weather
+        const data = response.status === 200 ? await response.json() : weather
+        // console.log(data)
         setWeather(data)
     };
 
